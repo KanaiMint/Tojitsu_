@@ -45,6 +45,8 @@ public class EnemyController : MonoBehaviour
     {
         //transform.position += Vel;
 
+        isGround = ground.IsGround();
+
         //毎フレームx方向リセット
         Vel.x = 0;
 
@@ -52,6 +54,12 @@ public class EnemyController : MonoBehaviour
         if (!isGround)
         {
             Vel.y += -gravity;
+        }
+
+
+        if (isGround)
+        {
+            Vel.y = 0.0f;
         }
 
         ShotFlame += Time.deltaTime;
