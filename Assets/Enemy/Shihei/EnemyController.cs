@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public PlayerScript Player;
+    public GameObject Player;
     public float Movespeed_Second;
     public Vector3 Vel;
     public bool Death;
@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Player = GetComponent<PlayerScript>();
+        Player = GameObject.Find("Player");
         ShotFlame = 0;
         //Vel = new Vector2(Movespeed_Second * Time.deltaTime, 0.0f);
     }
@@ -72,16 +72,23 @@ public class EnemyController : MonoBehaviour
         if (ShotFlame > 2)
         {
                 Debug.Log("awdadawdasdwa");
-            //if (Vector2.Distance(Player.transform.position, new Vector2( transform.position.x, transform.position.y)) < 0.5f) //‹ß‚­‚É‚¢‚½‚ç
-            //{
+            if (Vector2.Distance(Player.transform.position, new Vector2(transform.position.x, transform.position.y)) < 5.0f) //‹ß‚­‚É‚¢‚½‚ç
+            {
                 GameObject Bullet = Instantiate(BulletPrefab, this.transform.position, Quaternion.identity);
                 BulletController controller = Bullet.GetComponent<BulletController>();
-          
-            controller.muki = muki;
-           
-            
+                controller.muki = muki;
 
-           
+            }
+            else
+            {
+                Vector2 direction = Player.transform.position - transform.position;
+                direction.Normalize();
+                Vel.x += direction.x*Time.deltaTime;
+
+            }
+
+
+
             ShotFlame = kShotFlame;
         }
 

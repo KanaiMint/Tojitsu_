@@ -106,7 +106,7 @@ MonoBehaviour:
   Vel: {x: 0, y: 0, z: 0}
   Death: 0
   gravity: 0.8
-  BulletPrefab: {fileID: 0}
+  BulletPrefab: {fileID: 4836263129322746833, guid: e442ff3d51b61dd48af099361abac38b, type: 3}
   HP: 0
   ShotFlame: 10
   muki: 0
