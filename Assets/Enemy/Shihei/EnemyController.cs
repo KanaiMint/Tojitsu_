@@ -38,22 +38,21 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
-       
+        transform.position += Vel;
+
+
+      
     }
     // Update is called once per frame
     void Update()
     {
-        //transform.position += Vel;
-
+       
         isGround = ground.IsGround();
 
-        //毎フレームx方向リセット
-        Vel.x = 0;
-
-        //地面に触れていない間重力加算
+        ////地面に触れていない間重力加算
         if (!isGround)
         {
-            Vel.y += -gravity;
+            Vel.y += -gravity*Time.deltaTime;
         }
 
 
@@ -79,7 +78,6 @@ public class EnemyController : MonoBehaviour
         }
         if (ShotFlame > 2)
         {
-                Debug.Log("awdadawdasdwa");
             if (Vector2.Distance(Player.transform.position, new Vector2(transform.position.x, transform.position.y)) < 5.0f) //近くにいたら
             {
                 GameObject Bullet = Instantiate(BulletPrefab, this.transform.position, Quaternion.identity);
@@ -87,17 +85,21 @@ public class EnemyController : MonoBehaviour
                 controller.muki = muki;
 
             }
-            else
-            {
-                Vector2 direction = Player.transform.position - transform.position;
-                direction.Normalize();
-                Vel.x += direction.x*Time.deltaTime;
-
-            }
-
-
 
             ShotFlame = kShotFlame;
+        }
+        if (Vector2.Distance(Player.transform.position, new Vector2(transform.position.x, transform.position.y)) > 5.0f)
+        {
+            Vector2 direction = Player.transform.position - transform.position;
+            direction.Normalize();
+            Vel.x = (direction.x*Movespeed_Second) * Time.deltaTime;
+            Debug.Log("awdadawdasdwa");
+
+        }
+        else
+        {
+            //毎フレームx方向リセット
+            Vel.x = 0;
         }
 
         rigitbody.velocity = Vel;

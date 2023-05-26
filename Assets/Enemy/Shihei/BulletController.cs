@@ -18,6 +18,7 @@ public class BulletController : MonoBehaviour
         if (muki == false)
         {
             Vel = new Vector3(-BulletSpeed, 0, 0);
+            
         }
         else
         {
