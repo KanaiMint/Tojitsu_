@@ -14,7 +14,7 @@ public class PlayerScript : MonoBehaviour
     public GroundCheck ground;
     public Rigidbody2D playerRigidBody;
 
-    private bool isGround = false;
+    public bool isGround = false;
     private bool isPreSpace;
 
     private float jumpPos = 0.0f;
