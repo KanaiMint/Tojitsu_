@@ -14,12 +14,13 @@ public class PlayerScript : MonoBehaviour
     public GroundCheck ground;
     public Rigidbody2D playerRigidBody;
 
-    public bool isGround = false;
+   
     private bool isPreSpace;
 
     private float jumpPos = 0.0f;
     private bool isJump = false;
 
+    public bool isGround = false;
     public bool GetIsGround()
     {
         return isGround;
