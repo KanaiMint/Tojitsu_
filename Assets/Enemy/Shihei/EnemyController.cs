@@ -19,13 +19,14 @@ public class EnemyController : MonoBehaviour
     public bool muki=false;
     public GroundCheck ground;
     public Rigidbody2D rigitbody;
-
+    private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.Find("Player");
         ShotFlame = 0;
         //Vel = new Vector2(Movespeed_Second * Time.deltaTime, 0.0f);
+        spriteRenderer= gameObject.GetComponent<SpriteRenderer>();
     }
 
     public bool isGround = false;
@@ -36,29 +37,28 @@ public class EnemyController : MonoBehaviour
     }
 
 
-    private void FixedUpdate()
-    {
-        transform.position += Vel;
-
-
-      
-    }
+  
     // Update is called once per frame
     void Update()
     {
        
         isGround = ground.IsGround();
 
+
+
         ////地面に触れていない間重力加算
         if (!isGround)
         {
-            Vel.y += -gravity*Time.deltaTime;
+            Vel.y += -gravity;
         }
 
 
         if (isGround)
         {
             Vel.y = 0.0f;
+
+            transform.position += Vel* Time.deltaTime;
+        
         }
 
         ShotFlame += Time.deltaTime;
@@ -67,26 +67,38 @@ public class EnemyController : MonoBehaviour
         {
             if (Player.transform.position.x < this.transform.position.x)
             {
-
+                spriteRenderer.flipX = false;
                 muki = false;
             }
             else
             {
+                spriteRenderer.flipX = true;
                 muki = true;
 
             }
         }
         if (ShotFlame > 2)
         {
+            
             if (Vector2.Distance(Player.transform.position, new Vector2(transform.position.x, transform.position.y)) < 5.0f) //近くにいたら
             {
                 GameObject Bullet = Instantiate(BulletPrefab, this.transform.position, Quaternion.identity);
                 BulletController controller = Bullet.GetComponent<BulletController>();
                 controller.muki = muki;
+                Vel.x = UnityEngine.Random.Range(-2.0f, 2.0f);
 
+            }
+            else
+            {
+                //毎フレームx方向リセット
+                //Vel.x = 0;
             }
 
             ShotFlame = kShotFlame;
+        }
+        else
+        {
+            
         }
         if (Vector2.Distance(Player.transform.position, new Vector2(transform.position.x, transform.position.y)) > 5.0f)
         {
@@ -98,8 +110,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            //毎フレームx方向リセット
-            Vel.x = 0;
+            
         }
 
         rigitbody.velocity = Vel;

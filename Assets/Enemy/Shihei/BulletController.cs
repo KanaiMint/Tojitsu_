@@ -11,17 +11,21 @@ public class BulletController : MonoBehaviour
     public const int KlifeTime = 3;
     public bool muki = false;
     public float BulletSpeed=5;
+    private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         if (muki == false)
         {
+            spriteRenderer.flipX = false;
             Vel = new Vector3(-BulletSpeed, 0, 0);
             
         }
         else
         {
+            spriteRenderer.flipX = true;
             Vel = new Vector3(BulletSpeed, 0, 0);
         }
         lifeTime = 0;
