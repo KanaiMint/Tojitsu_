@@ -14,13 +14,23 @@ public class PlayerScript : MonoBehaviour
     public GroundCheck ground;
     public Rigidbody2D playerRigidBody;
 
-   
+    public GameObject BoomerangPrefab;
+
+    public float ShotRot = 0;
+
     private bool isPreSpace;
 
     private float jumpPos = 0.0f;
     private bool isJump = false;
 
     public bool isGround = false;
+
+    private Vector3 MousePos = Vector3.zero;
+    private Vector3 CameraMousePos = Vector3.zero;
+    private Vector3 ThisPos = Vector3.zero;
+
+   
+
     public bool GetIsGround()
     {
         return isGround;
@@ -31,11 +41,21 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        ThisPos = this.transform.position;
+        MousePos = Input.mousePosition;
+
+        CameraMousePos = Camera.main.ScreenToWorldPoint(MousePos);
+
+        float Radian = Mathf.Atan2(CameraMousePos.y - ThisPos.y, CameraMousePos.x - ThisPos.x);
+
+        ShotRot = Radian * 180.0f / Mathf.PI;
 
         //ê⁄ínîªíËÇìæÇÈ
         isGround = ground.IsGround();
@@ -61,7 +81,17 @@ public class PlayerScript : MonoBehaviour
             pVelocity.x = -moveSpeed;
         }
 
+        if (Input.GetMouseButton(0) )
+        {
+
+
+
+            GameObject boomerang = Instantiate(BoomerangPrefab,this.transform.position, Quaternion.Euler(0.0f,0.0f, ShotRot));
+            
+        }
+
         
+
         if (isGround)
         {
 
