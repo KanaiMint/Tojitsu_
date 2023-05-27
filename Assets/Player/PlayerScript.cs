@@ -29,7 +29,8 @@ public class PlayerScript : MonoBehaviour
     private Vector3 CameraMousePos = Vector3.zero;
     private Vector3 ThisPos = Vector3.zero;
 
-    private int cooltime = 0;
+    public float kBoomerangCoolTimeMax = 0;
+    private float BoomerangCoolTime = 0;
 
     public bool GetIsGround()
     {
@@ -81,18 +82,26 @@ public class PlayerScript : MonoBehaviour
             pVelocity.x = -moveSpeed;
         }
 
-        if (Input.GetMouseButton(0) && cooltime > 1)
+        if (BoomerangCoolTime > 0)
         {
-
-
-
-            GameObject boomerang = Instantiate(BoomerangPrefab,this.transform.position, Quaternion.Euler(0.0f,0.0f, ShotRot));
-            cooltime = 0;
+            BoomerangCoolTime -= Time.deltaTime;
         }
 
-        cooltime++;
 
-        if (isGround)
+        if (BoomerangCoolTime <= 0.0f)
+        {
+            
+            if (Input.GetMouseButton(0))
+            {
+                GameObject boomerang = Instantiate(BoomerangPrefab, this.transform.position, Quaternion.Euler(0.0f, 0.0f, ShotRot));
+                BoomerangCoolTime = kBoomerangCoolTimeMax;
+            }
+        }
+        
+
+
+
+            if (isGround)
         {
 
             pVelocity.y = 0;
