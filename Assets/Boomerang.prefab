@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 1381091849125961383}
   m_Layer: 0
   m_Name: Boomerang
-  m_TagString: Untagged
+  m_TagString: Boomerang
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,7 +145,8 @@ MonoBehaviour:
   col: {fileID: 1563606610127564108}
   TurnStart: 0
   Reflectioned: 0
-  TurnStartTime: 1
+  TurnStartTime: 3
+  TurnStayTime: 2
   TurnPerMinusStartTimeMinus: 0
 --- !u!58 &1563606610127564108
 CircleCollider2D:

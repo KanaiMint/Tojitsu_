@@ -36,6 +36,8 @@ public class BoomerangScript : MonoBehaviour
     public bool TurnStart = false;
     public bool Reflectioned = false;
     public float TurnStartTime = 5.0f;
+
+    public float TurnStayTime = 2.0f;
     private float TurnPer = 1.0f;
     private float TurnPerMinus = 0.01f;
     public float TurnPerMinusStartTimeMinus = 0.0f;
@@ -50,15 +52,15 @@ public class BoomerangScript : MonoBehaviour
         MoveVelocity.x = Mathf.Cos(Rotate / 180.0f * Mathf.PI) * MoveSpeed;
         MoveVelocity.y = Mathf.Sin(Rotate / 180.0f * Mathf.PI) * MoveSpeed;
 
-        DebugCircle = GameObject.Find("DebugCircle");
-        DebugCircle2 = GameObject.Find("DebugCircle2");
+        //DebugCircle = GameObject.Find("DebugCircle");
+        //DebugCircle2 = GameObject.Find("DebugCircle2");
 
         prePos = this.transform.position;
         preprePos = prePos;
         preVelocity = MoveVelocity;
         prepreVelocity = preVelocity;
 
-        TurnPerMinusStartTimeMinus = TurnStartTime / TurnPerMinus / 60.0f;
+        TurnPerMinusStartTimeMinus = (1.0f / TurnPerMinus) / 60.0f;
     }
 
     // Update is called once per frame
@@ -81,7 +83,7 @@ public class BoomerangScript : MonoBehaviour
 
         if (Reflectioned == false)
         {
-            if (LifeTime > TurnPerMinusStartTimeMinus - TurnStartTime)
+            if (LifeTime > TurnStartTime - TurnPerMinusStartTimeMinus) 
             {
                 TurnStart = true;
                 Gra.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.0f, 0.0f, 1.0f);
@@ -98,6 +100,13 @@ public class BoomerangScript : MonoBehaviour
                 }
             }
 
+            if(TurnStayTime >= 0.0f && TurnPer <= 0)
+            {
+                TurnPer = 0;
+                TurnStayTime -= Time.deltaTime;
+            }
+
+
             if (TurnPer < -1.0f)
             {
                 TurnPer = -1.0f;
@@ -110,7 +119,7 @@ public class BoomerangScript : MonoBehaviour
 
         }
 
-        int RotSpeed = 30;
+        int RotSpeed = 20;
 
         if (MoveVelocity.x < 0)
         {
@@ -118,7 +127,7 @@ public class BoomerangScript : MonoBehaviour
         }
         else
         {
-            GraRotate -= RotSpeed * DeathSlowPer;
+            GraRotate -= RotSpeed * DeathSlowPer ;
         }
 
 
@@ -150,8 +159,8 @@ public class BoomerangScript : MonoBehaviour
             Vector3 ThisPos = this.transform.position;
             Vector3 BlockPos = collision.ClosestPoint(this.transform.position);
 
-            DebugCircle.transform.position = ThisPos;
-            DebugCircle2.transform.position = BlockPos;
+           // DebugCircle.transform.position = ThisPos;
+            //DebugCircle2.transform.position = BlockPos;
 
             if (ThisVelocity.y > 0 && ThisPos.y > BlockPos.y)
             {
@@ -196,8 +205,8 @@ public class BoomerangScript : MonoBehaviour
             Vector3 ThisPos = this.transform.position;
             Vector3 BlockPos = collision.ClosestPoint(this.transform.position);
 
-            DebugCircle.transform.position = ThisPos;
-            DebugCircle2.transform.position = BlockPos;
+           // DebugCircle.transform.position = ThisPos;
+            //DebugCircle2.transform.position = BlockPos;
 
             col.enabled = false;
 
