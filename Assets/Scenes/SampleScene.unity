@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shihei
       objectReference: {fileID: 0}
+    - target: {fileID: 1089811135490211540, guid: d6147ac64da1ba04f952005f195e6c7b, type: 3}
+      propertyPath: DistancePlayer_Shihei
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1089811135490211542, guid: d6147ac64da1ba04f952005f195e6c7b, type: 3}
       propertyPath: m_RootOrder
       value: 1

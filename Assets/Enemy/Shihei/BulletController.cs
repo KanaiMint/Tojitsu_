@@ -12,6 +12,7 @@ public class BulletController : MonoBehaviour
     public bool muki = false;
     public float BulletSpeed=5;
     private SpriteRenderer spriteRenderer;
+    public Vector2 Direction;
 
     // Start is called before the first frame update
     void Start()
@@ -19,15 +20,13 @@ public class BulletController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (muki == false)
         {
-            spriteRenderer.flipX = false;
-            Vel = new Vector3(-BulletSpeed, 0, 0);
-            
+            spriteRenderer.flipX = false;      
         }
         else
         {
             spriteRenderer.flipX = true;
-            Vel = new Vector3(BulletSpeed, 0, 0);
         }
+        Vel=Direction*BulletSpeed;
         lifeTime = 0;
     }
 

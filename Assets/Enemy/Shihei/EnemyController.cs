@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
     public GroundCheck ground;
     public Rigidbody2D rigitbody;
     private SpriteRenderer spriteRenderer;
+    public float DistancePlayer_Shihei;
     // Start is called before the first frame update
     void Start()
     {
@@ -80,10 +81,13 @@ public class EnemyController : MonoBehaviour
         if (ShotFlame > 2)
         {
             
-            if (Vector2.Distance(Player.transform.position, new Vector2(transform.position.x, transform.position.y)) < 5.0f) //‹ß‚­‚É‚¢‚½‚ç
+            if (Vector2.Distance(Player.transform.position, new Vector2(transform.position.x, transform.position.y)) < DistancePlayer_Shihei) //‹ß‚­‚É‚¢‚½‚ç
             {
                 GameObject Bullet = Instantiate(BulletPrefab, this.transform.position, Quaternion.identity);
                 BulletController controller = Bullet.GetComponent<BulletController>();
+                Vector2 direction = Player.transform.position - transform.position;
+                direction.Normalize();
+                controller.Direction = direction;
                 controller.muki = muki;
                 Vel.x = UnityEngine.Random.Range(-2.0f, 2.0f);
 
@@ -100,7 +104,7 @@ public class EnemyController : MonoBehaviour
         {
             
         }
-        if (Vector2.Distance(Player.transform.position, new Vector2(transform.position.x, transform.position.y)) > 5.0f)
+        if (Vector2.Distance(Player.transform.position, new Vector2(transform.position.x, transform.position.y)) > DistancePlayer_Shihei)
         {
             Vector2 direction = Player.transform.position - transform.position;
             direction.Normalize();
