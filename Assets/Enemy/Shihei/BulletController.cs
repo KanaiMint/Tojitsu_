@@ -10,7 +10,7 @@ public class BulletController : MonoBehaviour
     public float lifeTime = 0;
     public const int KlifeTime = 3;
     public bool muki = false;
-    public float BulletSpeed=5;
+    public float BulletSpeed;
     private SpriteRenderer spriteRenderer;
     public Vector2 Direction;
 
