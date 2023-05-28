@@ -21,11 +21,11 @@ public class BoomerangScript : MonoBehaviour
 
     public float DeathTime = 10.0f;
     private float LifeTime = 0.0f;
-    public float DeathSlowPer = 1.0f;
+    private float DeathSlowPer = 1.0f;
     public float DeathSlowPerAcc = 0.01f;
 
-    public GameObject DebugCircle;
-    public GameObject DebugCircle2;
+    //public GameObject DebugCircle;
+   // public GameObject DebugCircle2;
 
     public float DistanceX;
     public float DistanceY;
@@ -33,15 +33,16 @@ public class BoomerangScript : MonoBehaviour
     //private float ColRad = 0.2f;
     public Collider2D col;
 
-    public bool TurnStart = false;
-    public bool Reflectioned = false;
+    private bool TurnStart = false;
+    private bool Reflectioned = false;
     public float TurnStartTime = 5.0f;
 
     public float TurnStayTime = 2.0f;
     private float TurnPer = 1.0f;
-    private float TurnPerMinus = 0.01f;
-    public float TurnPerMinusStartTimeMinus = 0.0f;
-
+    public float TurnPerMinus = 0.02f;
+    private float TurnPerMinusStartTimeMinus = 0.0f;
+    private LineRenderer lineRenderer;
+    private Vector3 Homepos = Vector3.zero;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,14 +60,17 @@ public class BoomerangScript : MonoBehaviour
         preprePos = prePos;
         preVelocity = MoveVelocity;
         prepreVelocity = preVelocity;
-
+        lineRenderer = GetComponent<LineRenderer>();
         TurnPerMinusStartTimeMinus = (1.0f / TurnPerMinus) / 60.0f;
+
+        Homepos = this.transform.position;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        col.enabled = true;
+        DrawLine();
         if (LifeTime >= DeathTime)
         {
             DeathSlowPer -= DeathSlowPerAcc;
@@ -89,6 +93,11 @@ public class BoomerangScript : MonoBehaviour
                 Gra.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.0f, 0.0f, 1.0f);
             }
         }
+        else
+        {
+            lineRenderer.enabled = false;
+            Gra.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.0f, 0.0f, 1.0f);
+        }
 
         if (TurnStart)
         {
@@ -104,15 +113,17 @@ public class BoomerangScript : MonoBehaviour
             {
                 TurnPer = 0;
                 TurnStayTime -= Time.deltaTime;
+                //Gra.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.0f, 0.0f, 1.0f);
             }
 
 
             if (TurnPer < -1.0f)
             {
                 TurnPer = -1.0f;
+                lineRenderer.enabled = false;
             }
 
-            if (Reflectioned == true && TurnPer < 0.0f && TurnPer != -1.0f)
+            if (Reflectioned == true && TurnPer <= 0.0f && TurnPer != -1.0f)
             {
                 Destroy(this.gameObject);
             }
@@ -223,5 +234,12 @@ public class BoomerangScript : MonoBehaviour
     void OnTriggerExit2D(Collider2D collision)
     {
         col.enabled = true;
+    }
+
+    private void DrawLine()
+    {
+        lineRenderer.positionCount = 2; // 線の頂点数を2に設定
+        lineRenderer.SetPosition(0, Homepos); // 線の始点を座標Aに設定
+        lineRenderer.SetPosition(1, transform.position); // 線の終点を座標Bに設定
     }
 }

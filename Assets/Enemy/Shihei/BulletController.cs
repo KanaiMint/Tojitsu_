@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     public EnemyController EnemyController_Script;
-    public Vector3 Vel;
+    public Vector2 Vel;
     public bool IsDead = false;
     public float lifeTime = 0;
     public const int KlifeTime = 3;
@@ -13,6 +13,8 @@ public class BulletController : MonoBehaviour
     public float BulletSpeed;
     private SpriteRenderer spriteRenderer;
     public Vector2 Direction;
+
+    public Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +35,7 @@ public class BulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            this.transform.position += Vel*Time.deltaTime;
+        rb.velocity = Vel ;
         lifeTime+= Time.deltaTime;
         if(lifeTime>2) { Destroy(this.gameObject); }
        
@@ -41,7 +43,7 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Ground")
         {
           Destroy(this.gameObject);
         }

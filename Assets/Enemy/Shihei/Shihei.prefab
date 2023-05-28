@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 1089811135490211542}
   - component: {fileID: 1089811135490211543}
   - component: {fileID: 1089811135490211540}
+  - component: {fileID: 4449273227073619513}
   - component: {fileID: 1089811135490211541}
   - component: {fileID: 1089811135490211530}
   - component: {fileID: 1089811135490211531}
   m_Layer: 0
   m_Name: Shihei
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +113,22 @@ MonoBehaviour:
   muki: 0
   ground: {fileID: 1089811136809853455}
   rigitbody: {fileID: 1089811135490211531}
+  DistancePlayer_Shihei: 0
   isGround: 0
+--- !u!114 &4449273227073619513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089811135490211528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79d368f33007aeb4195e6a01ceda9c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invincible: 0
+  MaxHP: 3
 --- !u!70 &1089811135490211541
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

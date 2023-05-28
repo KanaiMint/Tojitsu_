@@ -35,6 +35,16 @@ public class PlayerScript : MonoBehaviour
 
     private Vector3 prePos = Vector3.zero;
 
+    public bool invincible;
+    private float invincibleTime;
+    public float kMaxInvincibleTime = 2.0f;
+    private int HP;
+    public int MaxHP;
+
+    public float kDamagedLookTimeMax = 0.2f;
+    public float DamagedLookTime = 0.0f;
+    public bool SeePlayer = false;
+
     public bool GetIsGround()
     {
         return isGround;
@@ -52,6 +62,44 @@ public class PlayerScript : MonoBehaviour
     void FixedUpdate()
     {
 
+        if(invincibleTime > 0)
+        {
+            invincible = true;
+
+            if (DamagedLookTime > kDamagedLookTimeMax)
+            {
+                if (SeePlayer == false)
+                {
+                    SeePlayer = true;
+                }
+                else
+                {
+                    SeePlayer = false;
+                }
+                DamagedLookTime = 0.0f;
+            }
+            else
+            {
+
+                DamagedLookTime += Time.deltaTime;
+            }
+            invincibleTime -= Time.deltaTime;
+        }
+        else
+        {
+            invincible = false;
+            SeePlayer = true;
+        }
+
+        if (SeePlayer == false)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        }
+
         ThisPos = this.transform.position;
         MousePos = Input.mousePosition;
 
@@ -61,25 +109,25 @@ public class PlayerScript : MonoBehaviour
 
         ShotRot = Radian * 180.0f / Mathf.PI;
 
-        //Ú’n”»’è‚ğ“¾‚é
+        //ï¿½Ú’nï¿½ï¿½ï¿½ï¿½ğ“¾‚ï¿½
         isGround = ground.IsGround();
 
-        //–ˆƒtƒŒ[ƒ€x•ûŒüƒŠƒZƒbƒg
+        //ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½g
         pVelocity.x = 0;
 
-        //’n–Ê‚ÉG‚ê‚Ä‚¢‚È‚¢ŠÔd—Í‰ÁZ
+        //ï¿½nï¿½Ê‚ÉGï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½Ôdï¿½Í‰ï¿½ï¿½Z
         if (!isGround)
         {
             pVelocity.y += -gravity;
         }
 
-        //‰EˆÚ“®
+        //ï¿½Eï¿½Ú“ï¿½
         if (Input.GetKey(KeyCode.D))
         {
             pVelocity.x = moveSpeed;
         }
 
-        //¶ˆÚ“®
+        //ï¿½ï¿½ï¿½Ú“ï¿½
         if (Input.GetKey(KeyCode.A))
         {
             pVelocity.x = -moveSpeed;
@@ -109,19 +157,19 @@ public class PlayerScript : MonoBehaviour
 
             pVelocity.y = 0;
 
-            //ƒWƒƒƒ“ƒvˆ—A’·‰Ÿ‚µ‚Å‚Í”½‰‚µ‚È‚¢
+            //ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å‚Í”ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½
             if (Input.GetKey(KeyCode.Space) && !isPreSpace)
             {
-                //y•ûŒü‚ÌˆÚ“®ƒxƒNƒgƒ‹‚É‘ã“ü
+                //yï¿½ï¿½ï¿½ï¿½ï¿½ÌˆÚ“ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½É‘ï¿½ï¿½
                 pVelocity.y = jumpSpeed;
-                //ƒWƒƒƒ“ƒv‚ÌyÀ•W•Û‘¶
+                //ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½yï¿½ï¿½ï¿½Wï¿½Û‘ï¿½
                 jumpPos = transform.position.y;
-                //ƒWƒƒƒ“ƒvƒtƒ‰ƒO‚ğtrue‚É
+                //ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½tï¿½ï¿½ï¿½Oï¿½ï¿½trueï¿½ï¿½
                 isJump = true;
             }
             else
             {
-                //‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢ŠÔ‚ÍƒWƒƒƒ“ƒvƒtƒ‰ƒO‚ğfalse‚É
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½Ô‚ÍƒWï¿½ï¿½ï¿½ï¿½ï¿½vï¿½tï¿½ï¿½ï¿½Oï¿½ï¿½falseï¿½ï¿½
                 isJump = false;
             }
         }
@@ -129,7 +177,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space) && jumpPos + jumpHeight > transform.position.y)
             {
-                //y•ûŒü‚ÌˆÚ“®ƒxƒNƒgƒ‹‚É‘ã“ü
+                //yï¿½ï¿½ï¿½ï¿½ï¿½ÌˆÚ“ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½É‘ï¿½ï¿½
                 pVelocity.y = jumpSpeed;
             }
             else
@@ -140,10 +188,10 @@ public class PlayerScript : MonoBehaviour
         }
         else if (isJump)
         {
-            //ƒWƒƒƒ“ƒv’†‚É‚à“ü—Íó•tA’·‰Ÿ‚µ‚Å‚‚­”ò‚×‚é
+            //ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ï¿½Íï¿½tï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½×‚ï¿½
             if (Input.GetKey(KeyCode.Space) && jumpPos + jumpHeight > transform.position.y)
             {
-                //y•ûŒü‚ÌˆÚ“®ƒxƒNƒgƒ‹‚É‘ã“ü
+                //yï¿½ï¿½ï¿½ï¿½ï¿½ÌˆÚ“ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½É‘ï¿½ï¿½
                 pVelocity.y = jumpSpeed;
             }
             else
@@ -168,15 +216,16 @@ public class PlayerScript : MonoBehaviour
         if (collision.tag == "Boomerang")
         {
 
-            float playerBottom = prePos.y - this.gameObject.GetComponent<Renderer>().bounds.size.y / 2;
-            float tragetTop = collision.transform.position.y + collision.transform.GetChild(0).gameObject.GetComponent<Renderer>().bounds.size.y / 2;
+            float preplayerBottom = prePos.y - this.gameObject.GetComponent<Renderer>().bounds.size.y / 2;
+            float playerBottom = this.transform.position.y - this.gameObject.GetComponent<Renderer>().bounds.size.y / 2;
+            float tragetTop = collision.transform.position.y + (collision.gameObject.transform.localScale.y * 0.2f);
             tragetTop = collision.ClosestPoint(this.transform.position).y;
 
             //DebugPoint.transform.position = new Vector3(prePos.x, playerBottom, prePos.z);
             //DebugPoint2.transform.position = new Vector3(collision.transform.position.x, tragetTop, collision.transform.position.z);
 
-            //ƒvƒŒƒCƒ„[‚ÌˆÊ’u(‰º–Ê)‚ªƒ`ƒ‡[ƒN(ã–Ê)‚æ‚èã‚©‚Å”»’è‚ğ‚Æ‚é
-            if (playerBottom >= tragetTop)
+            //ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ÌˆÊ’u(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½[ï¿½N(ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ã‚©ï¿½Å”ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½
+            if (preplayerBottom >= tragetTop || playerBottom >= tragetTop)
             {
                 canJump = true;
                 jumpPos = transform.position.y;
@@ -191,12 +240,29 @@ public class PlayerScript : MonoBehaviour
 
         if (canJump)
         {
-            //y•ûŒü‚ÌˆÚ“®ƒxƒNƒgƒ‹‚É‘ã“ü
+            //yï¿½ï¿½ï¿½ï¿½ï¿½ÌˆÚ“ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½É‘ï¿½ï¿½
             pVelocity.y = jumpSpeed;
-            //ƒWƒƒƒ“ƒv‚ÌyÀ•W•Û‘¶
+            //ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½yï¿½ï¿½ï¿½Wï¿½Û‘ï¿½
             jumpPos = transform.position.y;
-            //ƒWƒƒƒ“ƒvƒtƒ‰ƒO‚ğtrue‚É
+            //ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½tï¿½ï¿½ï¿½Oï¿½ï¿½trueï¿½ï¿½
             isBoomerangJump = true;
+        }
+
+        if (collision.tag == "Enemy" || collision.tag == "EnemyBullet")
+        {
+           
+
+            if (invincible == false)
+            {
+                if (collision.tag == "EnemyBullet")
+                {
+                    Destroy(collision.gameObject);
+                }
+
+                HP--;
+                invincibleTime = kMaxInvincibleTime;
+                invincible = true;
+            }
         }
     }
 }
