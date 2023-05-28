@@ -43,7 +43,7 @@ public class BulletController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-          Destroy(this.gameObject);
+          //Destroy(this.gameObject);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

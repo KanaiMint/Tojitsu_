@@ -35,6 +35,16 @@ public class PlayerScript : MonoBehaviour
 
     private Vector3 prePos = Vector3.zero;
 
+    public bool invincible;
+    private float invincibleTime;
+    public float kMaxInvincibleTime = 2.0f;
+    private int HP;
+    public int MaxHP;
+
+    public float kDamagedLookTimeMax = 0.2f;
+    public float DamagedLookTime = 0.0f;
+    public bool SeePlayer = false;
+
     public bool GetIsGround()
     {
         return isGround;
@@ -51,6 +61,44 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if(invincibleTime > 0)
+        {
+            invincible = true;
+
+            if (DamagedLookTime > kDamagedLookTimeMax)
+            {
+                if (SeePlayer == false)
+                {
+                    SeePlayer = true;
+                }
+                else
+                {
+                    SeePlayer = false;
+                }
+                DamagedLookTime = 0.0f;
+            }
+            else
+            {
+
+                DamagedLookTime += Time.deltaTime;
+            }
+            invincibleTime -= Time.deltaTime;
+        }
+        else
+        {
+            invincible = false;
+            SeePlayer = true;
+        }
+
+        if (SeePlayer == false)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        }
 
         ThisPos = this.transform.position;
         MousePos = Input.mousePosition;
@@ -168,15 +216,16 @@ public class PlayerScript : MonoBehaviour
         if (collision.tag == "Boomerang")
         {
 
-            float playerBottom = prePos.y - this.gameObject.GetComponent<Renderer>().bounds.size.y / 2;
-            float tragetTop = collision.transform.position.y + collision.transform.GetChild(0).gameObject.GetComponent<Renderer>().bounds.size.y / 2;
+            float preplayerBottom = prePos.y - this.gameObject.GetComponent<Renderer>().bounds.size.y / 2;
+            float playerBottom = this.transform.position.y - this.gameObject.GetComponent<Renderer>().bounds.size.y / 2;
+            float tragetTop = collision.transform.position.y + (collision.gameObject.transform.localScale.y * 0.2f);
             tragetTop = collision.ClosestPoint(this.transform.position).y;
 
             //DebugPoint.transform.position = new Vector3(prePos.x, playerBottom, prePos.z);
             //DebugPoint2.transform.position = new Vector3(collision.transform.position.x, tragetTop, collision.transform.position.z);
 
             //プレイヤーの位置(下面)がチョーク(上面)より上かで判定をとる
-            if (playerBottom >= tragetTop)
+            if (preplayerBottom >= tragetTop || playerBottom >= tragetTop)
             {
                 canJump = true;
                 jumpPos = transform.position.y;
@@ -198,5 +247,24 @@ public class PlayerScript : MonoBehaviour
             //ジャンプフラグをtrueに
             isBoomerangJump = true;
         }
+
+        if (collision.tag == "Enemy" || collision.tag == "EnemyBullet")
+        {
+           
+
+            if (invincible == false)
+            {
+                if (collision.tag == "EnemyBullet")
+                {
+                    Destroy(collision.gameObject);
+                }
+
+                HP--;
+                invincibleTime = kMaxInvincibleTime;
+                invincible = true;
+            }
+        }
     }
+
+   
 }

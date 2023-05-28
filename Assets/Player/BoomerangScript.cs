@@ -39,7 +39,7 @@ public class BoomerangScript : MonoBehaviour
 
     public float TurnStayTime = 2.0f;
     private float TurnPer = 1.0f;
-    private float TurnPerMinus = 0.01f;
+    public float TurnPerMinus = 0.02f;
     public float TurnPerMinusStartTimeMinus = 0.0f;
 
     // Start is called before the first frame update
@@ -112,7 +112,7 @@ public class BoomerangScript : MonoBehaviour
                 TurnPer = -1.0f;
             }
 
-            if (Reflectioned == true && TurnPer < 0.0f && TurnPer != -1.0f)
+            if (Reflectioned == true && TurnPer <= 0.0f && TurnPer != -1.0f)
             {
                 Destroy(this.gameObject);
             }
