@@ -76,14 +76,14 @@ public class BoomerangScript : MonoBehaviour
             LifeTime += Time.deltaTime;
         }
 
-        if(DeathSlowPer <= 0.0f)
+        if (DeathSlowPer <= 0.0f)
         {
             Destroy(this.gameObject);
         }
 
         if (Reflectioned == false)
         {
-            if (LifeTime > TurnStartTime - TurnPerMinusStartTimeMinus) 
+            if (LifeTime > TurnStartTime - TurnPerMinusStartTimeMinus)
             {
                 TurnStart = true;
                 Gra.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.0f, 0.0f, 1.0f);
@@ -92,7 +92,7 @@ public class BoomerangScript : MonoBehaviour
 
         if (TurnStart)
         {
-            if(TurnPer > -1.0f)
+            if (TurnPer > -1.0f)
             {
                 if (Reflectioned == false || TurnPer > 0.0f)
                 {
@@ -100,7 +100,7 @@ public class BoomerangScript : MonoBehaviour
                 }
             }
 
-            if(TurnStayTime >= 0.0f && TurnPer <= 0)
+            if (TurnStayTime >= 0.0f && TurnPer <= 0)
             {
                 TurnPer = 0;
                 TurnStayTime -= Time.deltaTime;
@@ -127,19 +127,20 @@ public class BoomerangScript : MonoBehaviour
         }
         else
         {
-            GraRotate -= RotSpeed * DeathSlowPer ;
+            GraRotate -= RotSpeed * DeathSlowPer;
         }
 
 
-        if(GraRotate >= 360.0f)
+        if (GraRotate >= 360.0f)
         {
             GraRotate -= 360.0f;
-        }else if (GraRotate <= -360.0f)
+        }
+        else if (GraRotate <= -360.0f)
         {
             GraRotate += 360.0f;
         }
 
-        Gra.transform.eulerAngles = new Vector3(0.0f,0.0f,GraRotate);
+        Gra.transform.eulerAngles = new Vector3(0.0f, 0.0f, GraRotate);
         ThisVelocity = MoveVelocity * DeathSlowPer * TurnPer;
         ThisRigitBody.velocity = ThisVelocity;
         preprePos = prePos;
@@ -159,7 +160,7 @@ public class BoomerangScript : MonoBehaviour
             Vector3 ThisPos = this.transform.position;
             Vector3 BlockPos = collision.ClosestPoint(this.transform.position);
 
-           // DebugCircle.transform.position = ThisPos;
+            // DebugCircle.transform.position = ThisPos;
             //DebugCircle2.transform.position = BlockPos;
 
             if (ThisVelocity.y > 0 && ThisPos.y > BlockPos.y)
@@ -205,7 +206,7 @@ public class BoomerangScript : MonoBehaviour
             Vector3 ThisPos = this.transform.position;
             Vector3 BlockPos = collision.ClosestPoint(this.transform.position);
 
-           // DebugCircle.transform.position = ThisPos;
+            // DebugCircle.transform.position = ThisPos;
             //DebugCircle2.transform.position = BlockPos;
 
             col.enabled = false;
@@ -215,7 +216,7 @@ public class BoomerangScript : MonoBehaviour
             MoveVelocity.x *= -1;
             MoveVelocity.y *= -1;
             ThisRigitBody.velocity = MoveVelocity;
-            
+
         }
     }
 

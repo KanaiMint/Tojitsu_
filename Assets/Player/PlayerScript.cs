@@ -185,8 +185,8 @@ public class PlayerScript : MonoBehaviour
                 Destroy(collision.gameObject);
             }
 
-            
-            
+
+
         }
 
         if (canJump)
