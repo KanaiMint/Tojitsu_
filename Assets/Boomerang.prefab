@@ -145,7 +145,7 @@ MonoBehaviour:
   col: {fileID: 1563606610127564108}
   TurnStart: 0
   Reflectioned: 0
-  TurnStartTime: 3
+  TurnStartTime: 1
   TurnStayTime: 2
   TurnPerMinusStartTimeMinus: 0
 --- !u!58 &1563606610127564108
