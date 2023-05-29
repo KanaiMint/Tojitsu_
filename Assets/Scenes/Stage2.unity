@@ -2184,6 +2184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1458548564}
+  - component: {fileID: 1458548565}
   m_Layer: 0
   m_Name: ceiling Check
   m_TagString: Untagged
@@ -2206,6 +2207,18 @@ Transform:
   m_Father: {fileID: 1663641081}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1458548565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458548563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89eee5847053e2c4591930944b1dd1a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1663641076
 GameObject:
   m_ObjectHideFlags: 0
@@ -2291,10 +2304,12 @@ MonoBehaviour:
   gravity: 0.8
   jumpHeight: 0.1
   ground: {fileID: 2034769630}
+  ceiling: {fileID: 1458548565}
   playerRigidBody: {fileID: 0}
   BoomerangPrefab: {fileID: 7863446819839292548, guid: bb8be11e4727a734bb52552fad760023, type: 3}
   ShotRot: 0
   isGround: 0
+  isCeiling: 0
   kBoomerangCoolTimeMax: 0.5
   invincible: 0
   kMaxInvincibleTime: 2
