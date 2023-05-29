@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5865710430698731274}
   - component: {fileID: 362409376629846837}
   - component: {fileID: 5241276550654722853}
+  - component: {fileID: -4651083346811376244}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: EnemyBullet
@@ -47,12 +48,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyController_Script: {fileID: -3647903567197595752, guid: d6147ac64da1ba04f952005f195e6c7b, type: 3}
-  Vel: {x: 0, y: 0, z: 0}
+  Vel: {x: 0, y: 0}
   IsDead: 0
   lifeTime: 0
   muki: 0
   BulletSpeed: 5
   Direction: {x: 0, y: 0}
+  rb: {fileID: -4651083346811376244}
 --- !u!70 &362409376629846837
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -121,3 +123,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &-4651083346811376244
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836263129322746833}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
