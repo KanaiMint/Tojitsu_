@@ -141,9 +141,9 @@ MonoBehaviour:
   DistanceX: 0
   DistanceY: 0
   col: {fileID: 1563606610127564108}
-  TurnStartTime: 1
+  TurnStartTime: 0.5
   TurnStayTime: 2
-  TurnPerMinus: 0.04
+  TurnPerMinus: 0.21
 --- !u!58 &1563606610127564108
 CircleCollider2D:
   m_ObjectHideFlags: 0
