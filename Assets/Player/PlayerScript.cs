@@ -12,6 +12,7 @@ public class PlayerScript : MonoBehaviour
     public float gravity;
     public float jumpHeight;
     public GroundCheck ground;
+    public CeilingCheck ceiling;
     public Rigidbody2D playerRigidBody;
 
     public GameObject BoomerangPrefab;
@@ -25,6 +26,7 @@ public class PlayerScript : MonoBehaviour
     private bool isBoomerangJump = false;
 
     public bool isGround = false;
+    public bool isCeiling = false;
 
     private Vector3 MousePos = Vector3.zero;
     private Vector3 CameraMousePos = Vector3.zero;
@@ -111,6 +113,7 @@ public class PlayerScript : MonoBehaviour
 
         //�ڒn����𓾂�
         isGround = ground.IsGround();
+        isCeiling = ceiling.IsCeiling();
 
         //���t���[��x�������Z�b�g
         pVelocity.x = 0;
@@ -175,7 +178,7 @@ public class PlayerScript : MonoBehaviour
         }
         else if (isBoomerangJump)
         {
-            if (Input.GetKey(KeyCode.Space) && jumpPos + jumpHeight > transform.position.y)
+            if (Input.GetKey(KeyCode.Space) && jumpPos + jumpHeight > transform.position.y && isCeiling == false)
             {
                 //y�����̈ړ��x�N�g���ɑ��
                 pVelocity.y = jumpSpeed;
@@ -189,7 +192,7 @@ public class PlayerScript : MonoBehaviour
         else if (isJump)
         {
             //�W�����v���ɂ����͎�t�A�������ō�����ׂ�
-            if (Input.GetKey(KeyCode.Space) && jumpPos + jumpHeight > transform.position.y)
+            if (Input.GetKey(KeyCode.Space) && jumpPos + jumpHeight > transform.position.y && isCeiling == false)
             {
                 //y�����̈ړ��x�N�g���ɑ��
                 pVelocity.y = jumpSpeed;
