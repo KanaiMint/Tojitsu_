@@ -20,7 +20,7 @@ public class PlayerScript : MonoBehaviour
 
     public float ShotRot = 0;
 
-    private bool isPreSpace;
+    private float isPreSpace;
 
     private float jumpPos = 0.0f;
     private bool isJump = false;
@@ -50,6 +50,12 @@ public class PlayerScript : MonoBehaviour
 
     private Animator animator;
 
+    public GameObject TargetCircle;
+    public float TargetCirclePosPlus = 5.0f;
+
+    float horizontalInputR;
+    float VerticalInputtR;
+
     public bool GetIsGround()
     {
         return isGround;
@@ -70,8 +76,25 @@ public class PlayerScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+
+    void Update()
     {
+        if (Mathf.Abs(Input.GetAxis("HorizontalR")) > 0.5f || Mathf.Abs(Input.GetAxis("VerticalR")) > 0.5f)
+        {
+            horizontalInputR = Input.GetAxis("HorizontalR");
+
+            VerticalInputtR = Input.GetAxis("VerticalR");
+        }
+
+    }
+        void FixedUpdate()
+    {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float VerticalInputt = Input.GetAxis("Vertical");
+
+       
+
+        float DeadZone = 0.3f;
 
         Scene currentScene = gameObject.scene;
 
@@ -124,8 +147,17 @@ public class PlayerScript : MonoBehaviour
 
         float Radian = Mathf.Atan2(CameraMousePos.y - ThisPos.y, CameraMousePos.x - ThisPos.x);
 
+        if(Mathf.Abs(horizontalInputR) > 0 || Mathf.Abs(VerticalInputtR) > 0)
+        {
+            Radian = Mathf.Atan2(VerticalInputtR * 10000, horizontalInputR * 10000);
+        }
+
+        Debug.Log(horizontalInputR);
+        Debug.Log(VerticalInputtR);
         ShotRot = Radian * 180.0f / Mathf.PI;
 
+        TargetCircle.transform.localPosition = new Vector3(Mathf.Cos(Radian) * TargetCirclePosPlus, Mathf.Sin(Radian) * TargetCirclePosPlus, 0.0f);
+        //TargetCircle.transform.localPosition = new Vector3(Input.GetAxis("HorizontalR"), Input.GetAxis("VerticalR"), 0.0f);
         isGround = false;
         isGround = ground.IsGround();
         isCeiling = ceiling.IsCeiling();
@@ -140,21 +172,15 @@ public class PlayerScript : MonoBehaviour
         }
 
         //�E�ړ�
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || horizontalInput > DeadZone) 
         {
             pVelocity.x = moveSpeed;
         }
 
         //���ړ�
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || horizontalInput < -DeadZone)
         {
             pVelocity.x = -moveSpeed;
-        }
-
-        if (Input.GetKey(KeyCode.P))
-        {
-            DontDestroyOnLoad(this.gameObject);
-            SceneManager.LoadScene("Stage2");
         }
 
         if (BoomerangCoolTime > 0)
@@ -166,9 +192,15 @@ public class PlayerScript : MonoBehaviour
         if (BoomerangCoolTime <= 0.0f)
         {
 
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) || Input.GetAxis("Fire1") != 0)
             {
-                GameObject boomerang = Instantiate(BoomerangPrefab, this.transform.position, Quaternion.Euler(0.0f, 0.0f, ShotRot));
+                float ShotPosPuls = 0.32f;
+                Vector3 ShotPos = new Vector3(ShotPosPuls, ShotPosPuls * 2.0f, 0.0f);
+
+                ShotPos.x *= Mathf.Cos(Radian);
+                ShotPos.y *= Mathf.Sin(Radian);
+
+                GameObject boomerang = Instantiate(BoomerangPrefab, this.transform.position + ShotPos, Quaternion.Euler(0.0f, 0.0f, ShotRot));
                 BoomerangCoolTime = kBoomerangCoolTimeMax;
             }
         }
@@ -178,11 +210,11 @@ public class PlayerScript : MonoBehaviour
 
         if (isGround)
         {
-            
+
             pVelocity.y = 0;
 
             //�W�����v�����A�������ł͔������Ȃ�
-            if (Input.GetKey(KeyCode.Space) && !isPreSpace)
+            if ((Input.GetKey(KeyCode.Space) || Input.GetAxis("Jump") != 0) && isPreSpace == 0)
             {
                 //y�����̈ړ��x�N�g���ɑ��
                 pVelocity.y = jumpSpeed;
@@ -199,7 +231,7 @@ public class PlayerScript : MonoBehaviour
         }
         else if (isBoomerangJump)
         {
-            if (Input.GetKey(KeyCode.Space) && jumpPos + jumpHeight > transform.position.y && isCeiling == false)
+            if ((Input.GetKey(KeyCode.Space) || Input.GetAxis("Jump") != 0) && jumpPos + jumpHeight > transform.position.y && isCeiling == false)
             {
                 //y�����̈ړ��x�N�g���ɑ��
                 pVelocity.y = jumpSpeed;
@@ -213,7 +245,7 @@ public class PlayerScript : MonoBehaviour
         else if (isJump)
         {
             //�W�����v���ɂ����͎�t�A�������ō�����ׂ�
-            if (Input.GetKey(KeyCode.Space) && jumpPos + jumpHeight > transform.position.y && isCeiling == false)
+            if ((Input.GetKey(KeyCode.Space) || Input.GetAxis("Jump") != 0 ) && jumpPos + jumpHeight > transform.position.y && isCeiling == false)
             {
                 //y�����̈ړ��x�N�g���ɑ��
                 pVelocity.y = jumpSpeed;
@@ -232,7 +264,7 @@ public class PlayerScript : MonoBehaviour
 
             animator.SetBool("isJump", true);
 
-           
+
 
         }
         else
@@ -253,13 +285,13 @@ public class PlayerScript : MonoBehaviour
             }
 
         }
-           
-        
+
+
 
         playerRigidBody.velocity = pVelocity;
 
         prePos = this.transform.position;
-        isPreSpace = Input.GetKey(KeyCode.Space);
+        isPreSpace = Input.GetAxis("Jump");
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -269,10 +301,10 @@ public class PlayerScript : MonoBehaviour
         if (collision.tag == "Boomerang")
         {
 
-            float preplayerBottom = prePos.y - this.gameObject.GetComponent<Renderer>().bounds.size.y / 2;
-            float playerBottom = this.transform.position.y - this.gameObject.GetComponent<Renderer>().bounds.size.y / 2;
-            float tragetTop = collision.transform.position.y + (collision.gameObject.transform.localScale.y * 0.2f);
-            tragetTop = collision.ClosestPoint(this.transform.position).y;
+            float preplayerBottom = prePos.y - this.gameObject.GetComponent<Renderer>().bounds.size.y / 4;
+            float playerBottom = this.transform.position.y - this.gameObject.GetComponent<Renderer>().bounds.size.y / 4;
+            float tragetTop = collision.transform.position.y + collision.gameObject.transform.localScale.y * 0.2f;
+            //tragetTop = collision.ClosestPoint(this.transform.position).y;
 
             //DebugPoint.transform.position = new Vector3(prePos.x, playerBottom, prePos.z);
             //DebugPoint2.transform.position = new Vector3(collision.transform.position.x, tragetTop, collision.transform.position.z);
@@ -303,7 +335,7 @@ public class PlayerScript : MonoBehaviour
 
         if (collision.tag == "Enemy" || collision.tag == "EnemyBullet")
         {
-           
+
 
             if (invincible == false)
             {
@@ -318,4 +350,39 @@ public class PlayerScript : MonoBehaviour
             }
         }
     }
+
+    //void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    bool canJump = false;
+
+    //    if (collision.tag == "Boomerang")
+    //    {
+
+    //        float preplayerBottom = prePos.y - this.gameObject.GetComponent<Renderer>().bounds.size.y / 4;
+    //        float playerBottom = this.transform.position.y - this.gameObject.GetComponent<Renderer>().bounds.size.y / 4;
+    //        float tragetTop = collision.transform.position.y + collision.gameObject.transform.localScale.y * 0.2f;
+    //        //tragetTop = collision.ClosestPoint(this.transform.position).y;
+
+    //        if (preplayerBottom >= tragetTop || playerBottom >= tragetTop)
+    //        {
+    //            canJump = true;
+    //            jumpPos = transform.position.y;
+
+    //            Destroy(collision.gameObject);
+    //        }
+
+    //        Debug.Log("Fucccccccccccccccccccck");
+
+    //    }
+
+    //    if (canJump)
+    //    {
+    //        //y�����̈ړ��x�N�g���ɑ��
+    //        pVelocity.y = jumpSpeed;
+    //        //�W�����v����y���W�ۑ�
+    //        jumpPos = transform.position.y;
+    //        //�W�����v�t���O��true��
+    //        isBoomerangJump = true;
+    //    }
+    //}
 }

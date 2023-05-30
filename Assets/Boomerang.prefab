@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisRigitBody: {fileID: 8892182038623365540}
-  MoveSpeed: 8
+  MoveSpeed: 10
   Gra: {fileID: 549640786803530647}
   DeathTime: 5
   DeathSlowPerAcc: 0.01
