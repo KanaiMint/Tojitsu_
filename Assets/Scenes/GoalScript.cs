@@ -64,8 +64,8 @@ public class GoalScript : MonoBehaviour
             SceneManager.LoadScene(nextSceneName);
 
 
-            player.transform.position = nextStartPos;
             player.GetComponent<PlayerScript>().Init();
+            player.transform.position = nextStartPos;
 
         }
 

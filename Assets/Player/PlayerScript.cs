@@ -71,6 +71,8 @@ public class PlayerScript : MonoBehaviour
     {
         isGround = false;
         isCeiling = false;
+        pVelocity = Vector3.zero;
+        playerRigidBody.velocity = Vector3.zero;
     }
 
 
@@ -210,7 +212,7 @@ public class PlayerScript : MonoBehaviour
             if (Input.GetMouseButton(0) || Input.GetAxis("Fire1") != 0)
             {
                 float ShotPosPuls = 0.32f;
-                Vector3 ShotPos = new Vector3(ShotPosPuls, ShotPosPuls * 2.0f, 0.0f);
+                Vector3 ShotPos = new Vector3(ShotPosPuls, ShotPosPuls * 2.0f - 0.08f, 0.0f);
 
                 ShotPos.x *= Mathf.Cos(Radian);
                 ShotPos.y *= Mathf.Sin(Radian);
