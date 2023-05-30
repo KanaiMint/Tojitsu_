@@ -22,12 +22,14 @@ public class MoveScript : MonoBehaviour
     public int HP;
     private int MaxHP=250;
     public float Bulletflame = 0;
-
+    private bool isDamage = false;
    public bool isleft = false;
     public bool isright = false;
-
+    private float kDamagedLookTimeMax = 0.1f;
+    private float DamagedLookTime = 0.0f;
     public int Attackkind;
     private LineRenderer linerenderer;
+    private SpriteRenderer spriterenderer;
     public Slider slider;
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,7 @@ public class MoveScript : MonoBehaviour
         Startpos=transform.position;
         himocollision=Himo.GetComponent<Himocollision>();
         linerenderer = this.GetComponent<LineRenderer>();
+        spriterenderer = this.GetComponent<SpriteRenderer>();
         HP = MaxHP;
         slider.value = 1;
     }
@@ -43,6 +46,15 @@ public class MoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (DamagedLookTime>0)
+        {
+            spriterenderer.color = Color.red;
+            DamagedLookTime-=Time.deltaTime;
+        }
+        else
+        {
+            spriterenderer.color= Color.white;
+        }
         //HPÇSliderÇ…îΩâfÅB
         slider.value = (float)HP / (float)MaxHP; 
 
@@ -192,13 +204,17 @@ public class MoveScript : MonoBehaviour
             if (himocollision.Cut == true)
             {
                 HP -= 5;
+                DamagedLookTime = kDamagedLookTimeMax;
                 Destroy(collision.gameObject);
 
             }
             if(himocollision.Cut == false)
             {
+                DamagedLookTime = kDamagedLookTimeMax;
                 HP -= 1; Destroy(collision.gameObject);
+
             }
         }
+        
     }
 }
