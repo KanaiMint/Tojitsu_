@@ -44,7 +44,7 @@ public class GoalScript : MonoBehaviour
                 case 2:
                     nextSceneName = "stage2";
                     nextStartPos.x = -12f;
-                    nextStartPos.y = -4.2f;
+                    nextStartPos.y = -5.2f;
                     break;
                 case 3:
                     nextSceneName = "stage3";
@@ -52,9 +52,14 @@ public class GoalScript : MonoBehaviour
                     nextStartPos.y = 0;
                     break;
                 case 4:
-                    nextSceneName = "Boss";
-                    nextStartPos.x = -0f;
-                    nextStartPos.y = -2.2f;
+                    nextSceneName = "stage4";
+                    nextStartPos.x = -12f;
+                    nextStartPos.y = -5.2f;
+                    break;
+                case 5:
+                    nextSceneName = "stage5";
+                    nextStartPos.x = -12f;
+                    nextStartPos.y = -5.2f;
                     break;
             }
 
@@ -64,8 +69,8 @@ public class GoalScript : MonoBehaviour
             SceneManager.LoadScene(nextSceneName);
 
 
-            player.transform.position = nextStartPos;
             player.GetComponent<PlayerScript>().Init();
+            player.transform.position = nextStartPos;
 
         }
 

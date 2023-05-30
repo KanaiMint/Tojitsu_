@@ -62,6 +62,8 @@ public class PlayerScript : MonoBehaviour
     public AudioClip soundBoomeranJumpClip; // 再生する効果音のAudioClip
     public AudioClip sounddamageClip; // 再生する効果音のAudioClip
     private AudioSource audioSource;
+
+    public GameObject ReSpawnPoint;
     public bool GetIsGround()
     {
         return isGround;
@@ -71,6 +73,8 @@ public class PlayerScript : MonoBehaviour
     {
         isGround = false;
         isCeiling = false;
+        pVelocity = Vector3.zero;
+        playerRigidBody.velocity = Vector3.zero;
     }
 
 
@@ -100,15 +104,24 @@ public class PlayerScript : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float VerticalInputt = Input.GetAxis("Vertical");
 
-       
 
         float DeadZone = 0.3f;
 
-        Scene currentScene = gameObject.scene;
+        if(ReSpawnPoint == null)
+        {
+            ReSpawnPoint = GameObject.Find("RespawnPoint");
+        }
+        else
+        {
 
-        // シーンの名前を表示する
-        Debug.Log("オブジェクトが所属しているシーンの名前: " + currentScene.name);
+        }
 
+
+        if(this.transform.position.y < -15.0f)
+        {
+            Init();
+            this.transform.position = ReSpawnPoint.transform.position;
+        }
 
         if (invincibleTime > 0)
         {
@@ -164,11 +177,14 @@ public class PlayerScript : MonoBehaviour
         //Debug.Log(VerticalInputtR);
         ShotRot = Radian * 180.0f / Mathf.PI;
 
-        TargetCircle.transform.localPosition = new Vector3(Mathf.Cos(Radian) * TargetCirclePosPlus, Mathf.Sin(Radian) * TargetCirclePosPlus, 0.0f);
+        Vector3 psfoapofpadofpasodfpoapfd = new Vector3(Mathf.Cos(Radian) * TargetCirclePosPlus, Mathf.Sin(Radian) * TargetCirclePosPlus, 0.0f);
+        psfoapofpadofpasodfpoapfd += this.transform.position;
         //TargetCircle.transform.localPosition = new Vector3(Input.GetAxis("HorizontalR"), Input.GetAxis("VerticalR"), 0.0f);
 
-        Mathf.Clamp(TargetCircle.transform.localPosition.x, -CameraSize.x, CameraSize.x);
-        Mathf.Clamp(TargetCircle.transform.localPosition.y, -CameraSize.y, CameraSize.y);
+        psfoapofpadofpasodfpoapfd.x = Mathf.Clamp(psfoapofpadofpasodfpoapfd.x, -CameraSize.x, CameraSize.x);
+        psfoapofpadofpasodfpoapfd.y = Mathf.Clamp(psfoapofpadofpasodfpoapfd.y, -CameraSize.y, CameraSize.y);
+
+        TargetCircle.transform.position = psfoapofpadofpasodfpoapfd;
 
         isGround = false;
         isGround = ground.IsGround();
@@ -207,7 +223,7 @@ public class PlayerScript : MonoBehaviour
             if (Input.GetMouseButton(0) || Input.GetAxis("Fire1") != 0)
             {
                 float ShotPosPuls = 0.32f;
-                Vector3 ShotPos = new Vector3(ShotPosPuls, ShotPosPuls * 2.0f, 0.0f);
+                Vector3 ShotPos = new Vector3(ShotPosPuls, ShotPosPuls * 2.0f - 0.08f, 0.0f);
 
                 ShotPos.x *= Mathf.Cos(Radian);
                 ShotPos.y *= Mathf.Sin(Radian);
