@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -47,9 +48,17 @@ public class PlayerScript : MonoBehaviour
     public float DamagedLookTime = 0.0f;
     public bool SeePlayer = false;
 
+    private Animator animator;
+
     public bool GetIsGround()
     {
         return isGround;
+    }
+
+    public void Init()
+    {
+        isGround = false;
+        isCeiling = false;
     }
 
 
@@ -57,14 +66,20 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
-
+        animator = this.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
 
-        if(invincibleTime > 0)
+        Scene currentScene = gameObject.scene;
+
+        // シーンの名前を表示する
+        Debug.Log("オブジェクトが所属しているシーンの名前: " + currentScene.name);
+
+
+        if (invincibleTime > 0)
         {
             invincible = true;
 
@@ -111,14 +126,14 @@ public class PlayerScript : MonoBehaviour
 
         ShotRot = Radian * 180.0f / Mathf.PI;
 
-        //�ڒn����𓾂�
+        isGround = false;
         isGround = ground.IsGround();
         isCeiling = ceiling.IsCeiling();
 
-        //���t���[��x�������Z�b�g
+        //Debug.Log(isGround);
+
         pVelocity.x = 0;
 
-        //�n�ʂɐG��Ă��Ȃ��ԏd�͉��Z
         if (!isGround)
         {
             pVelocity.y += -gravity;
@@ -134,6 +149,12 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             pVelocity.x = -moveSpeed;
+        }
+
+        if (Input.GetKey(KeyCode.P))
+        {
+            DontDestroyOnLoad(this.gameObject);
+            SceneManager.LoadScene("Stage2");
         }
 
         if (BoomerangCoolTime > 0)
@@ -203,6 +224,18 @@ public class PlayerScript : MonoBehaviour
                 isJump = false;
             }
 
+        }
+
+
+
+
+        if (pVelocity.x != 0)
+        {
+            animator.SetBool("isWalk", true);
+        }
+        else
+        {
+            animator.SetBool("isWalk", false);
         }
 
 
