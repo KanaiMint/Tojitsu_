@@ -164,11 +164,14 @@ public class PlayerScript : MonoBehaviour
         //Debug.Log(VerticalInputtR);
         ShotRot = Radian * 180.0f / Mathf.PI;
 
-        TargetCircle.transform.localPosition = new Vector3(Mathf.Cos(Radian) * TargetCirclePosPlus, Mathf.Sin(Radian) * TargetCirclePosPlus, 0.0f);
+        Vector3 psfoapofpadofpasodfpoapfd = new Vector3(Mathf.Cos(Radian) * TargetCirclePosPlus, Mathf.Sin(Radian) * TargetCirclePosPlus, 0.0f);
+        psfoapofpadofpasodfpoapfd += this.transform.position;
         //TargetCircle.transform.localPosition = new Vector3(Input.GetAxis("HorizontalR"), Input.GetAxis("VerticalR"), 0.0f);
 
-        Mathf.Clamp(TargetCircle.transform.localPosition.x, -CameraSize.x, CameraSize.x);
-        Mathf.Clamp(TargetCircle.transform.localPosition.y, -CameraSize.y, CameraSize.y);
+        psfoapofpadofpasodfpoapfd.x = Mathf.Clamp(psfoapofpadofpasodfpoapfd.x, -CameraSize.x, CameraSize.x);
+        psfoapofpadofpasodfpoapfd.y = Mathf.Clamp(psfoapofpadofpasodfpoapfd.y, -CameraSize.y, CameraSize.y);
+
+        TargetCircle.transform.position = psfoapofpadofpasodfpoapfd;
 
         isGround = false;
         isGround = ground.IsGround();
