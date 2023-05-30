@@ -20,7 +20,7 @@ public class MoveScript : MonoBehaviour
     public float KAttackSecond;
     public float AttackFlame;
     public int HP;
-    private int MaxHP=250;
+    private int MaxHP=125;
     public float Bulletflame = 0;
     private bool isDamage = false;
    public bool isleft = false;
@@ -77,11 +77,11 @@ public class MoveScript : MonoBehaviour
         {
             linerenderer.enabled = true;
 
-            if (himocollision.HP < 7)
+            if (himocollision.HP < 3)
             {
                 linerenderer.startColor= Color.yellow;
                 linerenderer.endColor= Color.yellow;
-                if (himocollision.HP < 4)
+                if (himocollision.HP < 1)
                 {
                     linerenderer.startColor = Color.red;
                     linerenderer.endColor = Color.red;

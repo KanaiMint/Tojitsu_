@@ -7,7 +7,8 @@ public class Himocollision : MonoBehaviour
 {
     public bool Hit;
     public bool Cut;
-    public int HP=10;
+    public int HP=5;
+    public int kMaxHP=5;
     public GameObject Boss;
     public float HimoHukkatsuTime;
   
@@ -28,9 +29,9 @@ public class Himocollision : MonoBehaviour
         if(Cut==true)
         {
             HimoHukkatsuTime += Time.deltaTime;
-            if (HimoHukkatsuTime > 5)
+            if (HimoHukkatsuTime > 6)
             {
-                HP = 10;
+                HP = kMaxHP;
                 Cut = false;
             }
         }
