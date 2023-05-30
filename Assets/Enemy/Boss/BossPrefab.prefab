@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -6670405603718734958}
   m_Layer: 0
   m_Name: BossPrefab
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -297,6 +297,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c23eba573178974e8136cb0325dd9c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hit: 0
+  Cut: 0
+  HP: 3
+  Boss: {fileID: 0}
 --- !u!70 &7537973876107164057
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

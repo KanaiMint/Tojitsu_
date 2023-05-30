@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ground
   - Boomerang
+  - Enemy
+  - EnemyBullet
+  - Boss
   layers:
   - Default
   - TransparentFX
