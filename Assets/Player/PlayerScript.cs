@@ -58,6 +58,10 @@ public class PlayerScript : MonoBehaviour
 
     private Vector2 CameraSize = new Vector2 (13.5f,7.5f);
 
+    public AudioClip soundJumpClip; // 再生する効果音のAudioClip
+    public AudioClip soundBoomeranJumpClip; // 再生する効果音のAudioClip
+    public AudioClip sounddamageClip; // 再生する効果音のAudioClip
+    private AudioSource audioSource;
     public bool GetIsGround()
     {
         return isGround;
@@ -75,6 +79,8 @@ public class PlayerScript : MonoBehaviour
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
         animator = this.GetComponent<Animator>();
+        // AudioSourceコンポーネントを取得する
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -222,6 +228,7 @@ public class PlayerScript : MonoBehaviour
             //�W�����v�����A�������ł͔������Ȃ�
             if ((Input.GetKey(KeyCode.Space) || Input.GetAxis("Jump") != 0) && isPreSpace == 0)
             {
+                PlayjumpSound();
                 //y�����̈ړ��x�N�g���ɑ��
                 pVelocity.y = jumpSpeed;
                 //�W�����v����y���W�ۑ�
@@ -255,6 +262,7 @@ public class PlayerScript : MonoBehaviour
             {
                 //y�����̈ړ��x�N�g���ɑ��
                 pVelocity.y = jumpSpeed;
+                
             }
             else
             {
@@ -346,6 +354,7 @@ public class PlayerScript : MonoBehaviour
             jumpPos = transform.position.y;
             //�W�����v�t���O��true��
             isBoomerangJump = true;
+            PlayjumpBoomeranSound();
         }
 
         if (collision.tag == "Enemy" || collision.tag == "EnemyBullet")
@@ -358,7 +367,7 @@ public class PlayerScript : MonoBehaviour
                 {
                     Destroy(collision.gameObject);
                 }
-
+                PlayDamageSound();
                 HP--;
                 invincibleTime = kMaxInvincibleTime;
                 invincible = true;
@@ -400,4 +409,21 @@ public class PlayerScript : MonoBehaviour
     //        isBoomerangJump = true;
     //    }
     //}
+
+    private void PlayjumpSound()
+    {
+        // 効果音を再生する
+        audioSource.PlayOneShot(soundJumpClip);
+    }
+    private void PlayjumpBoomeranSound()
+    {
+        // 効果音を再生する
+        audioSource.PlayOneShot(soundBoomeranJumpClip);
+    }
+    private void PlayDamageSound()
+    {
+       
+        // 効果音を再生する
+        audioSource.PlayOneShot(sounddamageClip);
+    }
 }

@@ -31,6 +31,10 @@ public class MoveScript : MonoBehaviour
     private LineRenderer linerenderer;
     private SpriteRenderer spriterenderer;
     public Slider slider;
+
+    public AudioClip soundHitClip; // 再生する効果音のAudioClip
+
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +45,8 @@ public class MoveScript : MonoBehaviour
         spriterenderer = this.GetComponent<SpriteRenderer>();
         HP = MaxHP;
         slider.value = 1;
+        // AudioSourceコンポーネントを取得する
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -197,6 +203,13 @@ public class MoveScript : MonoBehaviour
 
         
     }
+
+    private void PlaySound()
+    {
+        // 効果音を再生する
+        audioSource.PlayOneShot(soundHitClip);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Boomerang")
@@ -206,10 +219,12 @@ public class MoveScript : MonoBehaviour
                 HP -= 5;
                 DamagedLookTime = kDamagedLookTimeMax;
                 Destroy(collision.gameObject);
+                PlaySound();
 
             }
             if(himocollision.Cut == false)
             {
+                PlaySound();
                 DamagedLookTime = kDamagedLookTimeMax;
                 HP -= 1; Destroy(collision.gameObject);
 
