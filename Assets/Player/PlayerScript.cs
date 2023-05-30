@@ -62,6 +62,8 @@ public class PlayerScript : MonoBehaviour
     public AudioClip soundBoomeranJumpClip; // 再生する効果音のAudioClip
     public AudioClip sounddamageClip; // 再生する効果音のAudioClip
     private AudioSource audioSource;
+
+    public GameObject ReSpawnPoint;
     public bool GetIsGround()
     {
         return isGround;
@@ -102,15 +104,24 @@ public class PlayerScript : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float VerticalInputt = Input.GetAxis("Vertical");
 
-       
 
         float DeadZone = 0.3f;
 
-        Scene currentScene = gameObject.scene;
+        if(ReSpawnPoint == null)
+        {
+            ReSpawnPoint = GameObject.Find("RespawnPoint");
+        }
+        else
+        {
 
-        // シーンの名前を表示する
-        Debug.Log("オブジェクトが所属しているシーンの名前: " + currentScene.name);
+        }
 
+
+        if(this.transform.position.y < -15.0f)
+        {
+            Init();
+            this.transform.position = ReSpawnPoint.transform.position;
+        }
 
         if (invincibleTime > 0)
         {
