@@ -28,7 +28,7 @@ public class SpiderScript : MonoBehaviour
     public Rigidbody2D rb;
     private Vector3 vel = Vector3.zero;
     public float gravity = 0.8f;
-    public bool isGround = false;
+    public bool isGround = false;//
     public EnemyStatus Es;
     // Start is called before the first frame update
     void Start()

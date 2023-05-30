@@ -26,6 +26,6 @@ public class HimoCollisionScript : MonoBehaviour
             cut = true; 
 
         }
-        Debug.Log("sex");
+        
     }
 }
