@@ -15,7 +15,7 @@ public class CameraScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        TargetObject = GameObject.Find("Player");
     }
 
     // Update is called once per frame
