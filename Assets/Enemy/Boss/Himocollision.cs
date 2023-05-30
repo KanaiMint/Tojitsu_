@@ -22,6 +22,9 @@ public class Himocollision : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if()
+        if (true)
+        {
+
+        }
     }
 }
