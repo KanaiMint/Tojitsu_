@@ -178,7 +178,7 @@ public class PlayerScript : MonoBehaviour
 
         if (isGround)
         {
-
+            
             pVelocity.y = 0;
 
             //�W�����v�����A�������ł͔������Ȃ�
@@ -227,17 +227,34 @@ public class PlayerScript : MonoBehaviour
         }
 
 
-
-
-        if (pVelocity.x != 0)
+        if (isJump == true || isBoomerangJump == true)
         {
-            animator.SetBool("isWalk", true);
+
+            animator.SetBool("isJump", true);
+
+           
+
         }
         else
         {
-            animator.SetBool("isWalk", false);
-        }
+            if (isGround == true)
+            {
+                animator.SetBool("isJump", false);
+            }
+            if (pVelocity.x != 0)
+            {
 
+                animator.SetBool("isWalk", true);
+
+            }
+            else
+            {
+                animator.SetBool("isWalk", false);
+            }
+
+        }
+           
+        
 
         playerRigidBody.velocity = pVelocity;
 
