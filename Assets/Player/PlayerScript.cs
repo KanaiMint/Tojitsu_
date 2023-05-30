@@ -56,6 +56,8 @@ public class PlayerScript : MonoBehaviour
     float horizontalInputR;
     float VerticalInputtR;
 
+    private Vector2 CameraSize = new Vector2 (13.5f,7.5f);
+
     public bool GetIsGround()
     {
         return isGround;
@@ -152,12 +154,16 @@ public class PlayerScript : MonoBehaviour
             Radian = Mathf.Atan2(VerticalInputtR * 10000, horizontalInputR * 10000);
         }
 
-        Debug.Log(horizontalInputR);
-        Debug.Log(VerticalInputtR);
+        //Debug.Log(horizontalInputR);
+        //Debug.Log(VerticalInputtR);
         ShotRot = Radian * 180.0f / Mathf.PI;
 
         TargetCircle.transform.localPosition = new Vector3(Mathf.Cos(Radian) * TargetCirclePosPlus, Mathf.Sin(Radian) * TargetCirclePosPlus, 0.0f);
         //TargetCircle.transform.localPosition = new Vector3(Input.GetAxis("HorizontalR"), Input.GetAxis("VerticalR"), 0.0f);
+
+        Mathf.Clamp(TargetCircle.transform.localPosition.x, -CameraSize.x, CameraSize.x);
+        Mathf.Clamp(TargetCircle.transform.localPosition.y, -CameraSize.y, CameraSize.y);
+
         isGround = false;
         isGround = ground.IsGround();
         isCeiling = ceiling.IsCeiling();
@@ -284,6 +290,15 @@ public class PlayerScript : MonoBehaviour
                 animator.SetBool("isWalk", false);
             }
 
+        }
+
+        if (pVelocity.x > 0.0f)
+        {
+            this.GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else if (pVelocity.x < 0.0f)
+        {
+            this.GetComponent<SpriteRenderer>().flipX = true;
         }
 
 
