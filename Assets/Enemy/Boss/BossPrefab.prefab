@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -1541279215245717140}
   - component: {fileID: 6054994724842475290}
   - component: {fileID: -6670405603718734958}
+  - component: {fileID: 1792216018772691448}
   m_Layer: 0
   m_Name: BossPrefab
   m_TagString: Boss
@@ -217,15 +218,21 @@ MonoBehaviour:
   MoveSpeed: 0
   MoveDirection: {x: 0, y: 0, z: 0}
   bullet1: {fileID: 3763109857478097160, guid: 44b443670ba5d9d49b50ee5efb3c835e, type: 3}
+  bumeranpurefab: {fileID: 0}
+  Himo: {fileID: 0}
+  himocollision: {fileID: 0}
   isAttack: 0
   TaregtLeftpos: {x: 0, y: 0}
   TaregtRightpos: {x: 0, y: 0}
   KAttackSecond: 0
   AttackFlame: 0
+  HP: 0
   Bulletflame: 0
   isleft: 0
   isright: 0
   Attackkind: 0
+  slider: {fileID: 0}
+  soundHitClip: {fileID: 0}
 --- !u!61 &-6670405603718734958
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -252,6 +259,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.2, y: 3.2}
   m_EdgeRadius: 0
+--- !u!95 &1792216018772691448
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722495540351532603}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f9c09276de7cc44f9f9568e779dcb14, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3460933394570620445
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,6 +329,7 @@ MonoBehaviour:
   Cut: 0
   HP: 3
   Boss: {fileID: 0}
+  HimoHukkatsuTime: 0
 --- !u!70 &7537973876107164057
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

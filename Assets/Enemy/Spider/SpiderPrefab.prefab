@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 2589557097945073608}
   - component: {fileID: 5366896926405972176}
   - component: {fileID: 8712421360938610433}
+  - component: {fileID: 8057595217314857699}
   m_Layer: 0
   m_Name: SpiderPrefab
   m_TagString: Enemy
@@ -341,6 +342,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &8057595217314857699
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641993250937583353}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 513cc94913423e3499d83b41acc5908f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1631006064682586219
 PrefabInstance:
   m_ObjectHideFlags: 0
