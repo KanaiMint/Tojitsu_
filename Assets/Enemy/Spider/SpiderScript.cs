@@ -30,6 +30,8 @@ public class SpiderScript : MonoBehaviour
     public float gravity = 0.8f;
     public bool isGround = false;//
     public EnemyStatus Es;
+    public GameObject Breakbumeran;
+    public float RandomScale = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -172,6 +174,17 @@ public class SpiderScript : MonoBehaviour
         lineRenderer.SetPosition(0, Homepos); // 線の始点を座標Aに設定
         lineRenderer.SetPosition(1, transform.position); // 線の終点を座標Bに設定
     }
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag == "Boomerang")
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Vector3 vector = new Vector3(transform.position.x + Random.Range(-RandomScale, RandomScale), transform.position.y + Random.Range(-RandomScale, RandomScale), 0);
+                GameObject bumeran1 = Instantiate(Breakbumeran, vector, Quaternion.identity);
 
-    
+            }
+        }
+    }
+
 }

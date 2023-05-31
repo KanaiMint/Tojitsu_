@@ -192,6 +192,8 @@ MonoBehaviour:
   gravity: 0.1
   isGround: 0
   Es: {fileID: 8075382763134791944}
+  Breakbumeran: {fileID: 4965017366228170580, guid: 4c59335d1bb15394ea115ea578635361, type: 3}
+  RandomScale: 0.5
 --- !u!114 &8075382763134791944
 MonoBehaviour:
   m_ObjectHideFlags: 0
