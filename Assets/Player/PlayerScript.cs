@@ -64,6 +64,10 @@ public class PlayerScript : MonoBehaviour
     private AudioSource audioSource;
 
     public GameObject ReSpawnPoint;
+
+    public GameObject Heart1;
+    public GameObject Heart2;
+    public GameObject Heart3;
     public bool GetIsGround()
     {
         return isGround;
@@ -85,11 +89,30 @@ public class PlayerScript : MonoBehaviour
         animator = this.GetComponent<Animator>();
         // AudioSourceコンポーネントを取得する
         audioSource = GetComponent<AudioSource>();
+
+        HP = MaxHP;
     }
 
-    // Update is called once per frame
+    void Dead()
+    {
+        Init();
+        this.transform.position = ReSpawnPoint.transform.position;
 
-    void Update()
+        GameObject[] Boomerang = GameObject.FindGameObjectsWithTag("Boomerang");
+
+        foreach (GameObject boomerang in Boomerang)
+        {
+            Destroy(boomerang);
+        }
+
+        GameObject StageManager = GameObject.Find("StageManager");
+
+
+    }
+
+        // Update is called once per frame
+
+        void Update()
     {
         if (Mathf.Abs(Input.GetAxis("HorizontalR")) > 0.5f || Mathf.Abs(Input.GetAxis("VerticalR")) > 0.5f)
         {
@@ -101,6 +124,19 @@ public class PlayerScript : MonoBehaviour
     }
         void FixedUpdate()
     {
+
+
+        if(HP <= 0)
+        {
+
+            Dead();
+
+
+        }
+
+
+
+
         float horizontalInput = Input.GetAxis("Horizontal");
         float VerticalInputt = Input.GetAxis("Vertical");
 
@@ -119,8 +155,7 @@ public class PlayerScript : MonoBehaviour
 
         if(this.transform.position.y < -15.0f)
         {
-            Init();
-            this.transform.position = ReSpawnPoint.transform.position;
+            Dead();
         }
 
         if (invincibleTime > 0)
@@ -145,11 +180,29 @@ public class PlayerScript : MonoBehaviour
                 DamagedLookTime += Time.deltaTime;
             }
             invincibleTime -= Time.deltaTime;
+
+
+            if (HP >= 3)
+            {
+                Heart3.SetActive(true);
+            }
+            if (HP >= 2)
+            {
+                Heart2.SetActive(true);
+            }
+            if (HP >= 1)
+            {
+                Heart1.SetActive(true);
+            }
+
         }
         else
         {
             invincible = false;
             SeePlayer = true;
+            Heart1.SetActive(false);
+            Heart2.SetActive(false);
+            Heart3.SetActive(false);
         }
 
         if (SeePlayer == false)

@@ -44,12 +44,12 @@ public class GoalScript : MonoBehaviour
                 case 2:
                     nextSceneName = "stage2";
                     nextStartPos.x = -12f;
-                    nextStartPos.y = -5.2f;
+                    nextStartPos.y = -4.2f;
                     break;
                 case 3:
                     nextSceneName = "stage3";
                     nextStartPos.x = -12f;
-                    nextStartPos.y = 0;
+                    nextStartPos.y = -5.2f;
                     break;
                 case 4:
                     nextSceneName = "stage4";
