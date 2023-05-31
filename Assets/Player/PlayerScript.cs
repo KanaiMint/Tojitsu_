@@ -132,7 +132,12 @@ public class PlayerScript : MonoBehaviour
             Destroy(gameObject);
         }
 
-            if (Mathf.Abs(Input.GetAxis("HorizontalR")) > 0.5f || Mathf.Abs(Input.GetAxis("VerticalR")) > 0.5f)
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            UnityEngine.Application.Quit();
+        }
+
+        if (Mathf.Abs(Input.GetAxis("HorizontalR")) > 0.5f || Mathf.Abs(Input.GetAxis("VerticalR")) > 0.5f)
         {
             horizontalInputR = Input.GetAxis("HorizontalR");
 
