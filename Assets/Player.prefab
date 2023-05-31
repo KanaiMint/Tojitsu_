@@ -371,6 +371,8 @@ MonoBehaviour:
   soundJumpClip: {fileID: 8300000, guid: df40c0be495274e479cb2743d066e680, type: 3}
   soundBoomeranJumpClip: {fileID: 8300000, guid: 99ebab96547dbcc40b6c55815b32f1ed, type: 3}
   sounddamageClip: {fileID: 8300000, guid: 064d74cb823381947b5818526dc79a38, type: 3}
+  ReSpawnPoint: {fileID: 0}
+  BreakBoomeran: {fileID: 4965017366228170580, guid: 4c59335d1bb15394ea115ea578635361, type: 3}
 --- !u!50 &9166238240296880622
 Rigidbody2D:
   serializedVersion: 4
