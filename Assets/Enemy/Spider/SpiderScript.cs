@@ -119,7 +119,7 @@ public class SpiderScript : MonoBehaviour
 
                         isShot = true;
                     }
-                    if (Himoflame > 3)
+                    if (Himoflame > 3 && isReturn == false)
                     {
                         Vector2 direction = Player.transform.position - transform.position;
                         direction.Normalize();

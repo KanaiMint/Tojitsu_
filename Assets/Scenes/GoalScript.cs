@@ -44,12 +44,12 @@ public class GoalScript : MonoBehaviour
                 case 2:
                     nextSceneName = "stage2";
                     nextStartPos.x = -12f;
-                    nextStartPos.y = -5.2f;
+                    nextStartPos.y = -4.2f;
                     break;
                 case 3:
                     nextSceneName = "stage3";
                     nextStartPos.x = -12f;
-                    nextStartPos.y = 0;
+                    nextStartPos.y = -5.2f;
                     break;
                 case 4:
                     nextSceneName = "stage4";
@@ -60,6 +60,41 @@ public class GoalScript : MonoBehaviour
                     nextSceneName = "stage5";
                     nextStartPos.x = -12f;
                     nextStartPos.y = -5.2f;
+                    break;
+                case 6:
+                    nextSceneName = "stage6";
+                    nextStartPos.x = -12f;
+                    nextStartPos.y = -5.2f;
+                    break;
+                case 7:
+                    nextSceneName = "stage7";
+                    nextStartPos.x = -12f;
+                    nextStartPos.y = -5.2f;
+                    break;
+                case 8:
+                    nextSceneName = "stage8";
+                    nextStartPos.x = -12f;
+                    nextStartPos.y = -5.2f;
+                    break;
+                case 9:
+                    nextSceneName = "stage9";
+                    nextStartPos.x = -12f;
+                    nextStartPos.y = -5.2f;
+                    break;
+                case 10:
+                    nextSceneName = "stage10";
+                    nextStartPos.x = -12f;
+                    nextStartPos.y = -5.2f;
+                    break;
+                case 11:
+                    nextSceneName = "stage11";
+                    nextStartPos.x = -12f;
+                    nextStartPos.y = -5.2f;
+                    break;
+                case 99:
+                    nextSceneName = "Boss";
+                    nextStartPos.x = -9f;
+                    nextStartPos.y = -3.2f;
                     break;
             }
 

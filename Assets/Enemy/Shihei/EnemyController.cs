@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
     public Rigidbody2D rigitbody;
     private SpriteRenderer spriteRenderer;
     public float DistancePlayer_Shihei;
+
     // Start is called before the first frame update
     void Start()
     {
