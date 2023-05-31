@@ -105,9 +105,11 @@ public class PlayerScript : MonoBehaviour
             Destroy(boomerang);
         }
 
-        GameObject StageManager = GameObject.Find("StageManager");
-
-
+        //GameObject StageManager = GameObject.Find("StageManager");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //StageIniter
+        //StageManager.GetComponent<StageIniter>().Init();
+        HP = MaxHP;
     }
 
         // Update is called once per frame

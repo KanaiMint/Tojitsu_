@@ -61,6 +61,11 @@ public class GoalScript : MonoBehaviour
                     nextStartPos.x = -12f;
                     nextStartPos.y = -5.2f;
                     break;
+                case 8:
+                    nextSceneName = "Boss";
+                    nextStartPos.x = -9f;
+                    nextStartPos.y = -3.2f;
+                    break;
             }
 
 
