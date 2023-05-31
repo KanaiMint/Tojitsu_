@@ -77,9 +77,12 @@ public class MoveScript : MonoBehaviour
         {
            ClearText.SetActive(true);
             TTitle.SetActive(true);
-            if(Input.GetKeyDown(KeyCode.T)) 
+            this.gameObject.GetComponent<SpriteRenderer>().color = new Color (0.0f, 0.0f, 0.0f, 0.0f);
+            this.gameObject.GetComponent<BoxCollider2D>().enabled = false; 
+            if (Input.GetKeyDown(KeyCode.T)) 
             {
                 SceneManager.LoadScene("Title");
+                Destroy(Player);
             }
         }
 

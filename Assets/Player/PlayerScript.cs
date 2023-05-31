@@ -297,6 +297,10 @@ public class PlayerScript : MonoBehaviour
         {
             pVelocity.x = -moveSpeed;
         }
+        if (Input.GetKey(KeyCode.O) || Input.GetKey(KeyCode.U))
+        {
+            SceneManager.LoadScene("Boss");
+        }
 
         if (BoomerangCoolTime > 0)
         {
