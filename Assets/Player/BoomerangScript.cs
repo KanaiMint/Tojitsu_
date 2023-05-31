@@ -90,13 +90,13 @@ public class BoomerangScript : MonoBehaviour
             if (LifeTime > TurnStartTime - TurnPerMinusStartTimeMinus)
             {
                 TurnStart = true;
-                Gra.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.0f, 0.0f, 1.0f);
+                Gra.GetComponent<SpriteRenderer>().color = new Color(0.75f, 0.75f, 0.75f, 1.0f);
             }
         }
         else
         {
             lineRenderer.enabled = false;
-            Gra.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.0f, 0.0f, 1.0f);
+            Gra.GetComponent<SpriteRenderer>().color = new Color(0.75f, 0.75f, 0.75f, 1.0f);
         }
 
         if (TurnStart)
@@ -113,7 +113,7 @@ public class BoomerangScript : MonoBehaviour
             {
                 TurnPer = 0;
                 TurnStayTime -= Time.deltaTime;
-                //Gra.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.0f, 0.0f, 1.0f);
+                //Gra.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 1.0f);
             }
 
 
