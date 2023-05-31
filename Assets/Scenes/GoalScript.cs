@@ -61,7 +61,37 @@ public class GoalScript : MonoBehaviour
                     nextStartPos.x = -12f;
                     nextStartPos.y = -5.2f;
                     break;
+                case 6:
+                    nextSceneName = "stage6";
+                    nextStartPos.x = -12f;
+                    nextStartPos.y = -5.2f;
+                    break;
+                case 7:
+                    nextSceneName = "stage7";
+                    nextStartPos.x = -12f;
+                    nextStartPos.y = -5.2f;
+                    break;
                 case 8:
+                    nextSceneName = "stage8";
+                    nextStartPos.x = -12f;
+                    nextStartPos.y = -5.2f;
+                    break;
+                case 9:
+                    nextSceneName = "stage9";
+                    nextStartPos.x = -12f;
+                    nextStartPos.y = -5.2f;
+                    break;
+                case 10:
+                    nextSceneName = "stage10";
+                    nextStartPos.x = -12f;
+                    nextStartPos.y = -5.2f;
+                    break;
+                case 11:
+                    nextSceneName = "stage11";
+                    nextStartPos.x = -12f;
+                    nextStartPos.y = -5.2f;
+                    break;
+                case 99:
                     nextSceneName = "Boss";
                     nextStartPos.x = -9f;
                     nextStartPos.y = -3.2f;

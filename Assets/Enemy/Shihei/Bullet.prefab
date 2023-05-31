@@ -52,7 +52,7 @@ MonoBehaviour:
   IsDead: 0
   lifeTime: 0
   muki: 0
-  BulletSpeed: 0.03
+  BulletSpeed: 2
   Direction: {x: 0, y: 0}
   rb: {fileID: -4651083346811376244}
 --- !u!70 &362409376629846837

@@ -68,6 +68,12 @@ public class PlayerScript : MonoBehaviour
     public GameObject Heart1;
     public GameObject Heart2;
     public GameObject Heart3;
+
+
+    private float PauseButton = 0.0f;
+    private float prePauseButton = 0.0f;
+    private bool isPause = false;
+
     public bool GetIsGround()
     {
         return isGround;
@@ -98,12 +104,12 @@ public class PlayerScript : MonoBehaviour
         Init();
         this.transform.position = ReSpawnPoint.transform.position;
 
-        GameObject[] Boomerang = GameObject.FindGameObjectsWithTag("Boomerang");
+        //GameObject[] Boomerang = GameObject.FindGameObjectsWithTag("Boomerang");
 
-        foreach (GameObject boomerang in Boomerang)
-        {
-            Destroy(boomerang);
-        }
+        //foreach (GameObject boomerang in Boomerang)
+        //{
+        //    Destroy(boomerang);
+        //}
 
         //GameObject StageManager = GameObject.Find("StageManager");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -121,12 +127,40 @@ public class PlayerScript : MonoBehaviour
             horizontalInputR = Input.GetAxis("HorizontalR");
 
             VerticalInputtR = Input.GetAxis("VerticalR");
+
         }
 
+        PauseButton = Input.GetAxisRaw("Pause");
+
+        if (PauseButton != 0 && prePauseButton == 0)
+        {
+            if (isPause == false)
+            {
+                isPause = true;
+            }
+            else
+            {
+                isPause = false;
+            }
+
+        }
+
+        if (isPause == true)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+        }
+
+        prePauseButton = PauseButton;
     }
         void FixedUpdate()
     {
+        
 
+       
 
         if(HP <= 0)
         {
@@ -149,11 +183,6 @@ public class PlayerScript : MonoBehaviour
         {
             ReSpawnPoint = GameObject.Find("RespawnPoint");
         }
-        else
-        {
-
-        }
-
 
         if(this.transform.position.y < -15.0f)
         {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
@@ -28,7 +29,7 @@ public class BulletController : MonoBehaviour
         {
             spriteRenderer.flipX = true;
         }
-        Vel=Direction*BulletSpeed;
+        Vel=Direction*BulletSpeed * Time.deltaTime;
         lifeTime = 0;
     }
 
