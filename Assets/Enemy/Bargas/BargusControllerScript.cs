@@ -27,7 +27,7 @@ public class BargusControllerScript : MonoBehaviour
             isGroundFlame += Time.deltaTime;
             if (isGroundFlame > 2)
             {
-                vel = new Vector3(0, 5f);
+                vel = new Vector3(0, 3f);
                
             }
             else if (isGroundFlame > 0.25f)
@@ -39,7 +39,7 @@ public class BargusControllerScript : MonoBehaviour
         {
             isGround = false;
             isGroundFlame = 0;
-            vel += new Vector3(0, -0.01f);
+            vel += new Vector3(0, -0.05f);
         }
     }
 

@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358b76449b104e642956ea03456d3245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  Player: {fileID: 9166238240296880595, guid: e4c01bb3890e5574d909e2e212458100, type: 3}
   Movespeed_Second: 0
   Vel: {x: 0, y: 0, z: 0}
   Death: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
   muki: 0
   ground: {fileID: 1089811136809853455}
   rigitbody: {fileID: 1089811135490211531}
-  DistancePlayer_Shihei: 0
+  DistancePlayer_Shihei: 5.02
   isGround: 0
 --- !u!114 &4449273227073619513
 MonoBehaviour:
