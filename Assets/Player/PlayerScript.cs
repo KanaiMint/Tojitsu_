@@ -125,6 +125,18 @@ public class PlayerScript : MonoBehaviour
 
         void Update()
     {
+
+        if (Input.GetKey(KeyCode.T))
+        {
+            SceneManager.LoadScene("Title");
+            Destroy(gameObject);
+        }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            UnityEngine.Application.Quit();
+        }
+
         if (Mathf.Abs(Input.GetAxis("HorizontalR")) > 0.5f || Mathf.Abs(Input.GetAxis("VerticalR")) > 0.5f)
         {
             horizontalInputR = Input.GetAxis("HorizontalR");
@@ -150,11 +162,11 @@ public class PlayerScript : MonoBehaviour
 
         if (isPause == true)
         {
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
         }
         else
         {
-            Time.timeScale = 1.0f;
+            //Time.timeScale = 1.0f;
         }
 
         prePauseButton = PauseButton;
@@ -472,7 +484,7 @@ public class PlayerScript : MonoBehaviour
            
         }
 
-        if (collision.tag == "Enemy" || collision.tag == "EnemyBullet")
+        if (collision.tag == "Enemy" || collision.tag == "EnemyBullet" || collision.tag == "Boss")
         {
 
 
