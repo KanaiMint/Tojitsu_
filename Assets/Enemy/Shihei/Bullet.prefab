@@ -47,12 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4466f6f14284494f8677ade0263938f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyController_Script: {fileID: -3647903567197595752, guid: d6147ac64da1ba04f952005f195e6c7b, type: 3}
+  EnemyController_Script: {fileID: 1089811135490211540, guid: d6147ac64da1ba04f952005f195e6c7b, type: 3}
   Vel: {x: 0, y: 0}
   IsDead: 0
   lifeTime: 0
   muki: 0
-  BulletSpeed: 5
+  BulletSpeed: 0.03
   Direction: {x: 0, y: 0}
   rb: {fileID: -4651083346811376244}
 --- !u!70 &362409376629846837

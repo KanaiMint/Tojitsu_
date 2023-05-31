@@ -10,7 +10,7 @@ public class BulletController : MonoBehaviour
     public float lifeTime = 0;
     public const int KlifeTime = 3;
     public bool muki = false;
-    public float BulletSpeed;
+    public float BulletSpeed=0.03f;
     private SpriteRenderer spriteRenderer;
     public Vector2 Direction;
 
@@ -35,7 +35,8 @@ public class BulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = Vel ;
+        // rb.velocity = Vel ;
+        transform.position += new Vector3( Vel.x,Vel.y,0);
         lifeTime+= Time.deltaTime;
         if(lifeTime>2) { Destroy(this.gameObject); }
        
@@ -50,7 +51,7 @@ public class BulletController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag( "Ground"))
+        if(collision.gameObject.CompareTag("Ground"))
         {
             Destroy(this.gameObject);
         }
