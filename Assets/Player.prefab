@@ -630,6 +630,7 @@ MonoBehaviour:
   Heart1: {fileID: 6405180230768042516}
   Heart2: {fileID: 5577089335617224003}
   Heart3: {fileID: 3391528634384416669}
+  BreakBoomeran: {fileID: 4965017366228170580, guid: 4c59335d1bb15394ea115ea578635361, type: 3}
 --- !u!50 &9166238240296880622
 Rigidbody2D:
   serializedVersion: 4

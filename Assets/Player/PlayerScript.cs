@@ -74,6 +74,9 @@ public class PlayerScript : MonoBehaviour
     private float prePauseButton = 0.0f;
     private bool isPause = false;
 
+
+    public GameObject BreakBoomeran;
+    public float RandomScale = 0.5f;
     public bool GetIsGround()
     {
         return isGround;
@@ -423,7 +426,7 @@ public class PlayerScript : MonoBehaviour
 
         if (collision.tag == "Boomerang")
         {
-
+           
             float preplayerBottom = prePos.y - this.gameObject.GetComponent<Renderer>().bounds.size.y / 4;
             float playerBottom = this.transform.position.y - this.gameObject.GetComponent<Renderer>().bounds.size.y / 4;
             float tragetTop = collision.transform.position.y + collision.gameObject.transform.localScale.y * 0.2f;
@@ -438,7 +441,8 @@ public class PlayerScript : MonoBehaviour
                 canJump = true;
                 jumpPos = transform.position.y;
                 //collision.GetComponent<ChokeScript>().GeneratePowder();
-
+               
+                
                 Destroy(collision.gameObject);
             }
 
@@ -455,6 +459,13 @@ public class PlayerScript : MonoBehaviour
             //�W�����v�t���O��true��
             isBoomerangJump = true;
             PlayjumpBoomeranSound();
+            for(int i = 0; i < 5; i++)
+            {
+                Vector3 vector = new Vector3(transform.position.x + Random.Range(-RandomScale, RandomScale), transform.position.y + Random.Range(-RandomScale, RandomScale), 0);
+                GameObject bumeran1 = Instantiate(BreakBoomeran, vector, Quaternion.identity);
+
+            }
+           
         }
 
         if (collision.tag == "Enemy" || collision.tag == "EnemyBullet")
